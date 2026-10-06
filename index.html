@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joni AI</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f19;
+      color: white;
+    }
+
+    .app {
+      max-width: 700px;
+      margin: auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background: #111827;
+      border-bottom: 1px solid #263043;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      color: #9ca3af;
+      margin-bottom: 0;
+    }
+
+    #chat {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .message {
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 15px;
+      max-width: 85%;
+      line-height: 1.5;
+    }
+
+    .joni {
+      background: #1f2937;
+      margin-right: auto;
+    }
+
+    .user {
+      background: #2563eb;
+      margin-left: auto;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+      background: #111827;
+      border-top: 1px solid #263043;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      font-size: 16px;
+      background: #1f2937;
+      color: white;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 0 20px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header>
+      <h1>🤖 Joni AI</h1>
+      <p>তোমার নিজের AI Assistant</p>
+    </header>
+
+    <div id="chat">
+      <div class="message joni">
+        👋 হ্যালো! আমি Joni AI। তোমার সাথে কথা বলতে প্রস্তুত!
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input
+        id="userInput"
+        type="text"
+        placeholder="Joni-কে কিছু লিখো..."
+        onkeydown="if(event.key === 'Enter') sendMessage()"
+      >
+
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+  </div>
+
+  <script>
+    function sendMessage() {
+
+      const input = document.getElementById("userInput");
+      const chat = document.getElementById("chat");
+
+      const message = input.value.trim();
+
+      if (message === "") return;
+
+      // User message
+      const userMessage = document.createElement("div");
+      userMessage.className = "message user";
+      userMessage.textContent = message;
+      chat.appendChild(userMessage);
+
+      input.value = "";
+
+      // Joni response
+      setTimeout(() => {
+
+        const joniMessage = document.createElement("div");
+        joniMessage.className = "message joni";
+
+        joniMessage.textContent =
+          "আমি Joni AI 🤖। তুমি লিখেছো: " + message;
+
+        chat.appendChild(joniMessage);
+
+        chat.scrollTop = chat.scrollHeight;
+
+      }, 500);
+    }
+  </script>
+
+</body>
+  </html>
